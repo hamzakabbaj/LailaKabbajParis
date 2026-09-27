@@ -11,9 +11,11 @@ import APropos from '../components/APropos.astro';
 import Citation from '../components/Citation.astro';
 import FAQ from '../components/FAQ.astro';
 import CTAFinal from '../components/CTAFinal.astro';
+import StructuredData from '../components/StructuredData.astro';
 ---
 
 <Base>
+	<StructuredData slot="head" />
 	<Hero />
 	<Probleme />
 	<Chiffres />

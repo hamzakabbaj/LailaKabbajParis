@@ -29,6 +29,8 @@ jobs:
       - run: npm run check
       # Production build: placeholder testimonials are removed.
       - run: npm run build
+      # Checks on the built site (tests/).
+      - run: npm test
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist

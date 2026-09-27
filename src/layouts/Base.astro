@@ -41,6 +41,7 @@ const ogImage = new URL(withBase('/og-image.jpg'), Astro.site);
 		<meta name="twitter:card" content="summary_large_image" />
 		<Font cssVariable="--font-serif" preload />
 		<Font cssVariable="--font-sans" preload />
+		<slot name="head" />
 	</head>
 	<body>
 		<a class="skip-link" href="#contenu">Aller au contenu</a>
