@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# CodeMaster backlog (private scratch, never committed)
+.codemaster

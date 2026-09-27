@@ -11,9 +11,11 @@
 		"build:preview": "PUBLIC_SHOW_PLACEHOLDERS=true astro build",
 		"preview": "astro preview",
 		"check": "astro check",
+		"test": "node --test \"tests/*.test.mjs\"",
 		"astro": "astro"
 	},
 	"dependencies": {
+		"@astrojs/sitemap": "^3.7.4",
 		"astro": "^7.3.5"
 	},
 	"allowScripts": {

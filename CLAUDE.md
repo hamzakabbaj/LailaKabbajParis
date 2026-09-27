@@ -16,9 +16,10 @@ npm run build          # production build → dist/ (placeholder testimonials re
 npm run build:preview  # production build that keeps placeholders, for sharing a preview
 npm run preview        # serve dist/ (Astro 7 runs it detached; stop with `npx astro preview stop`)
 npm run check          # astro check (TypeScript + .astro diagnostics)
+npm test               # checks on the built site in dist/ (run npm run build first)
 ```
 
-There is no test suite. Verify changes with `npm run check`, a build, and screenshots, including at a 390px phone width.
+Tests check the built site: each file in `tests/` (Node's built-in test runner) reads `dist/`, so run `npm run build`, then `npm test`. Also verify changes with `npm run check` and screenshots, including at a 390px phone width.
 
 ## Architecture
 

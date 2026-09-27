@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -7,6 +8,8 @@ export default defineConfig({
 	// TODO: avec un domaine définitif, mettre site: 'https://<domaine>' et supprimer base.
 	site: 'https://hamzakabbaj.github.io',
 	base: '/LailaKabbajParis',
+	// sitemap-index.xml + sitemap-0.xml au build. /merci (après paiement) et la 404 n'ont rien à faire dans Google.
+	integrations: [sitemap({ filter: (page) => !/\/(merci|404)\/?$/.test(new URL(page).pathname) })],
 	// Les polices sont téléchargées au build et servies depuis notre domaine (pas d'appel à Google côté visiteur → RGPD).
 	fonts: [
 		{
