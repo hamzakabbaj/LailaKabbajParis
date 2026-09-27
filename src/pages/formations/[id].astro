@@ -17,7 +17,7 @@ interface Props {
 const { data } = Astro.props.formation;
 ---
 
-<Base title={data.titre} description={data.accroche}>
+<Base title={data.titre} description={`${data.accroche} Une formation de ${site.name}.`}>
 	<article>
 		<header class="fhero">
 			<div class="container fhero__inner">

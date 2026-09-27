@@ -8,9 +8,11 @@ import '../styles/global.css';
 interface Props {
 	title?: string;
 	description?: string;
+	// Pages hors index Google (confirmation de paiement, 404).
+	noindex?: boolean;
 }
 
-const { title, description = site.description } = Astro.props;
+const { title, description = site.description, noindex = false } = Astro.props;
 const fullTitle = title ? `${title} · ${site.name}` : `${site.name} · Lecture rapide à Paris et en ligne`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 // Image d'aperçu des liens partagés (WhatsApp, Facebook, LinkedIn…) : URL absolue obligatoire.
@@ -24,6 +26,7 @@ const ogImage = new URL(withBase('/og-image.jpg'), Astro.site);
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>{fullTitle}</title>
 		<meta name="description" content={description} />
+		{noindex && <meta name="robots" content="noindex" />}
 		<link rel="canonical" href={canonical} />
 		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
 		<meta name="theme-color" content="#f5efe7" />
