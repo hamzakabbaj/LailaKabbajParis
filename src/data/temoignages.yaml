@@ -1,0 +1,34 @@
+# Témoignages. Ceux marqués `placeholder: true` sont INVENTÉS, pour la mise en page uniquement.
+# Ils sont masqués automatiquement en production : publier de faux avis est une pratique
+# commerciale trompeuse (Code de la consommation, art. L121-4). Remplacez-les par de vrais
+# témoignages (avec l'accord écrit des personnes) puis passez placeholder à false.
+
+- id: camille
+  nom: Camille
+  contexte: 34 ans, cheffe de projet
+  citation: "J'avais une pile de livres commencés sur ma table de nuit. En un mois, j'en ai terminé trois — et je me souviens vraiment de ce que j'ai lu."
+  resultat: 3 livres terminés en un mois
+  formation: lire-mieux-lire-plus
+  placeholder: true
+
+- id: thomas
+  nom: Thomas
+  contexte: Étudiant en prépa
+  citation: "Le survol avant la lecture a changé ma façon de réviser. Je relis beaucoup moins, et mes fiches en mind map me font gagner un temps fou."
+  resultat: Moins de relectures, des révisions plus courtes
+  formation: accompagnement
+  placeholder: true
+
+- id: nadia
+  nom: Nadia
+  contexte: Juriste
+  citation: "Je pensais que lire vite voulait dire survoler. Laila m'a montré l'inverse : je lis mes dossiers plus vite ET avec plus d'attention."
+  formation: lire-mieux-lire-plus
+  placeholder: true
+
+- id: helene
+  nom: Hélène
+  contexte: Grande lectrice, 61 ans
+  citation: "L'atelier m'a donné le déclic. Deux heures, trois techniques, et j'ai retrouvé le plaisir de lire le soir sans m'endormir à la deuxième page."
+  formation: atelier-declic
+  placeholder: true

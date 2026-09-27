@@ -1,0 +1,25 @@
+---
+import Page from '../layouts/Page.astro';
+import { site } from '../site';
+---
+
+<Page title="Mentions légales">
+	<p class="todo">À compléter avant la mise en ligne (obligation légale, art. 6 de la LCEN).</p>
+
+	<h2>Éditrice du site</h2>
+	<p>
+		{site.name} — [statut : micro-entreprise / société] — SIRET [à compléter]<br />
+		Adresse : [à compléter]<br />
+		E-mail : <a href={`mailto:${site.email}`}>{site.email}</a><br />
+		Directrice de la publication : {site.name}
+	</p>
+
+	<h2>Hébergement</h2>
+	<p>[Nom de l'hébergeur, adresse, téléphone — à compléter selon l'hébergeur choisi]</p>
+
+	<h2>Propriété intellectuelle</h2>
+	<p>
+		Les contenus de ce site (textes, visuels, supports de formation) sont la propriété de {site.name}, sauf
+		mention contraire. Méthode Boclet® est une marque déposée appartenant à son titulaire.
+	</p>
+</Page>

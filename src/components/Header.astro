@@ -1,0 +1,192 @@
+---
+import { site } from '../site';
+
+const links = [
+	{ href: '/#methode', label: 'La méthode' },
+	{ href: '/#test', label: 'Testez-vous' },
+	{ href: '/#formations', label: 'Formations' },
+	{ href: '/#a-propos', label: 'À propos' },
+	{ href: '/#faq', label: 'FAQ' },
+];
+---
+
+<header class="header">
+	<div class="container header__inner">
+		<a class="logo" href="/" aria-label={`${site.name}, accueil`}>
+			<span class="logo__name">{site.name}</span>
+			<span class="logo__tag">{site.tagline} · {site.city}</span>
+		</a>
+
+		<nav class="nav" aria-label="Navigation principale">
+			<ul>
+				{links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+			</ul>
+		</nav>
+
+		<a class="btn btn--primary header__cta" href="/#formations">Voir les formations</a>
+
+		<details class="menu">
+			<summary aria-label="Ouvrir le menu">
+				<span></span><span></span>
+			</summary>
+			<nav class="menu__panel" aria-label="Navigation mobile">
+				<ul>
+					{links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+				</ul>
+				<a class="btn btn--primary" href="/#formations">Voir les formations</a>
+			</nav>
+		</details>
+	</div>
+</header>
+
+<script>
+	// Referme le menu mobile après un clic sur un lien d'ancre.
+	document.querySelectorAll<HTMLAnchorElement>('.menu__panel a').forEach((a) =>
+		a.addEventListener('click', () => a.closest('details')?.removeAttribute('open')),
+	);
+</script>
+
+<style>
+	.header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		background: color-mix(in srgb, var(--paper) 88%, transparent);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+	}
+
+	.header__inner {
+		display: flex;
+		align-items: center;
+		gap: 32px;
+		min-height: 76px;
+	}
+
+	.logo {
+		display: flex;
+		flex-direction: column;
+		text-decoration: none;
+		line-height: 1.1;
+	}
+
+	.logo__name {
+		font-family: var(--font-serif);
+		font-size: 1.55rem;
+		font-weight: 500;
+		letter-spacing: -0.01em;
+	}
+
+	.logo__tag {
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--brown);
+	}
+
+	.nav {
+		margin-left: auto;
+	}
+
+	.nav ul,
+	.menu ul {
+		display: flex;
+		gap: 28px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.nav a {
+		font-weight: 600;
+		font-size: 0.95rem;
+		text-decoration: none;
+		color: var(--ink-soft);
+		transition: color 0.2s;
+	}
+
+	.nav a:hover {
+		color: var(--brown);
+	}
+
+	.header__cta {
+		min-height: 44px;
+		padding: 10px 20px;
+		font-size: 0.95rem;
+	}
+
+	.menu {
+		display: none;
+		margin-left: auto;
+	}
+
+	.menu summary {
+		display: grid;
+		gap: 6px;
+		place-content: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: var(--sand);
+		list-style: none;
+		cursor: pointer;
+	}
+
+	.menu summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.menu summary span {
+		width: 18px;
+		height: 1.5px;
+		background: var(--ink);
+		transition: transform 0.2s;
+	}
+
+	.menu[open] summary span:first-child {
+		transform: translateY(3.75px) rotate(45deg);
+	}
+
+	.menu[open] summary span:last-child {
+		transform: translateY(-3.75px) rotate(-45deg);
+	}
+
+	.menu__panel {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 100%;
+		display: grid;
+		gap: 24px;
+		padding: 24px var(--gutter) 32px;
+		background: var(--paper);
+		border-bottom: 1px solid var(--line);
+		box-shadow: var(--shadow);
+	}
+
+	.menu__panel ul {
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.menu__panel ul a {
+		display: block;
+		padding: 10px 0;
+		font-family: var(--font-serif);
+		font-size: 1.5rem;
+		text-decoration: none;
+	}
+
+	@media (max-width: 960px) {
+		.nav,
+		.header__cta {
+			display: none;
+		}
+
+		.menu {
+			display: block;
+		}
+	}
+</style>

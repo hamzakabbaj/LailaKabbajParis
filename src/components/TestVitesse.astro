@@ -1,0 +1,498 @@
+---
+// Test de vitesse de lecture : tout se passe dans le navigateur, rien n'est envoyé ni stocké.
+import Icon from './Icon.astro';
+
+const questions = [
+	{
+		q: "Qu'est-ce qui étonne Augustin chez Ambroise ?",
+		choix: ['Il lit sans prononcer les mots', 'Il lit un livre interdit', 'Il lit plusieurs livres à la fois'],
+		bonne: 0,
+	},
+	{
+		q: 'Selon le texte, quelle innovation a rendu la lecture des yeux plus facile ?',
+		choix: ['Les enluminures', 'Les espaces entre les mots', 'La ponctuation moderne'],
+		bonne: 1,
+	},
+	{
+		q: 'Que dit le texte de la petite voix intérieure ?',
+		choix: ["Qu'il faut la faire taire", "Qu'elle ralentit toujours la lecture", "Qu'elle aide souvent à comprendre"],
+		bonne: 2,
+	},
+];
+---
+
+<section class="section section--deep" id="test">
+	<div class="container">
+		<header class="section-head section-head--center">
+			<p class="eyebrow">Testez-vous</p>
+			<h2>Combien de mots lisez-vous <span class="accent">par minute</span>&nbsp;?</h2>
+			<p>
+				Lisez le texte à votre rythme habituel, comme un livre. Trois petites questions suivent pour vérifier
+				la compréhension : c'est elle qui compte.
+			</p>
+		</header>
+
+		<div class="test" data-test data-moyenne="214">
+			<!-- Étape 1 : consignes -->
+			<div class="test__panel test__intro" data-step="intro">
+				<ul>
+					<li><Icon name="timer" /> Environ 2 minutes</li>
+					<li><Icon name="eye" /> Lisez normalement, sans accélérer</li>
+					<li><Icon name="lock" /> Rien n'est enregistré</li>
+				</ul>
+				<button class="btn btn--primary" type="button" data-start>Commencer la lecture</button>
+			</div>
+
+			<!-- Étape 2 : lecture -->
+			<div class="test__panel" data-step="lecture" hidden>
+				<article class="test__texte" data-texte tabindex="-1">
+					<h3>Le jour où l'on a lu en silence</h3>
+					<p>
+						Milan, vers l'an 384. Un jeune professeur de rhétorique, Augustin, rend visite à l'évêque Ambroise.
+						Il le trouve plongé dans un livre et reste un long moment à l'observer, sans oser le déranger. Ce qui
+						le frappe n'est pas ce qu'Ambroise lit, mais la manière dont il lit : ses yeux parcourent les pages,
+						son esprit en cherche le sens, mais sa voix se tait et ses lèvres ne bougent pas.
+					</p>
+					<p>
+						Des années plus tard, Augustin raconte la scène dans ses Confessions, comme un détail assez
+						singulier pour mériter d'être noté. On en a longtemps conclu que presque personne ne lisait en
+						silence dans l'Antiquité. Les historiens nuancent aujourd'hui cette idée : la lecture silencieuse
+						existait, mais la lecture à voix haute restait très répandue. On lisait souvent pour les autres, à
+						plusieurs, et le texte écrit était d'abord fait pour être entendu.
+					</p>
+					<p>
+						Il faudra des siècles pour que la lecture devienne l'activité intime que nous connaissons. Au Moyen
+						Âge, les copistes prennent l'habitude de séparer les mots par des espaces, ce qui rend la lecture
+						des yeux beaucoup plus facile. Plus tard, l'imprimerie multiplie les livres, et chacun peut enfin
+						lire seul, à son propre rythme.
+					</p>
+					<p>
+						Pourtant, quelque chose de la lecture à voix haute est resté en nous. Lorsque nous lisons, la
+						plupart d'entre nous entendent encore une petite voix intérieure qui prononce les mots. Loin d'être
+						un défaut, elle aide souvent à comprendre. L'enjeu n'est donc pas de la faire taire, mais
+						d'apprendre à lire avec plus de fluidité : moins de retours en arrière inutiles, un regard mieux
+						guidé et une intention claire avant d'ouvrir le livre.
+					</p>
+				</article>
+				<div class="test__bar">
+					<button class="btn btn--primary" type="button" data-fini>J'ai terminé ma lecture</button>
+				</div>
+			</div>
+
+			<!-- Étape 3 : compréhension -->
+			<form class="test__panel test__quiz" data-step="quiz" hidden>
+				<h3 tabindex="-1">Trois questions, sans revenir au texte</h3>
+				{
+					questions.map((item, i) => (
+						<fieldset>
+							<legend>
+								{i + 1}. {item.q}
+							</legend>
+							{item.choix.map((c, j) => (
+								<label>
+									<input type="radio" name={`q${i}`} value={j === item.bonne ? '1' : '0'} required />
+									<span>{c}</span>
+								</label>
+							))}
+						</fieldset>
+					))
+				}
+				<button class="btn btn--primary" type="submit">Voir mon résultat</button>
+			</form>
+
+			<!-- Étape 4 : résultat -->
+			<div class="test__panel test__resultat" data-step="resultat" hidden aria-live="polite">
+				<div class="resultat__top">
+					<div>
+						<p class="resultat__label">Votre vitesse</p>
+						<p class="resultat__mpm"><span data-mpm>0</span> <small>mots/min</small></p>
+					</div>
+					<div>
+						<p class="resultat__label">Compréhension</p>
+						<p class="resultat__mpm"><span data-score>0</span><small>/3</small></p>
+					</div>
+				</div>
+
+				<div class="jauge" aria-hidden="true">
+					<div class="jauge__piste">
+						<span class="jauge__moyenne" data-jauge-moyenne><em>Moyenne en français · 214</em></span>
+						<span class="jauge__vous" data-jauge-vous><em>Vous</em></span>
+					</div>
+				</div>
+
+				<p class="resultat__message" data-message></p>
+
+				<div class="projection">
+					<h3>Imaginez dans <span class="accent">6 mois</span>…</h3>
+					<label class="projection__slider">
+						<span>En lisant <strong data-minutes-label>20 minutes</strong> par jour à votre vitesse actuelle :</span>
+						<input type="range" min="10" max="60" step="5" value="20" data-minutes />
+					</label>
+					<p class="projection__resultat">
+						≈ <strong data-livres>0</strong> livres de 250 pages en 6 mois.
+					</p>
+					<p class="projection__note">Et chaque mot gagné par minute se transforme en pages.</p>
+				</div>
+
+				<div class="resultat__actions">
+					<a class="btn btn--primary" href="/formations/atelier-declic">Commencer par l'Atelier Déclic <Icon name="arrow" /></a>
+					<button class="btn btn--ghost" type="button" data-restart>Refaire le test</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	const MOTS_PAR_LIVRE = 62500; // ~250 pages × 250 mots
+	const JAUGE_MAX = 500;
+
+	document.querySelectorAll<HTMLElement>('[data-test]').forEach((root) => {
+		const moyenne = Number(root.dataset.moyenne);
+		const $ = <T extends Element>(sel: string) => root.querySelector<T>(sel)!;
+		const steps = root.querySelectorAll<HTMLElement>('[data-step]');
+		const texte = $<HTMLElement>('[data-texte]');
+		const form = $<HTMLFormElement>('[data-step="quiz"]');
+		const minutes = $<HTMLInputElement>('[data-minutes]');
+
+		// On ne compte que les paragraphes (pas le titre).
+		const nbMots = Array.from(texte.querySelectorAll('p'))
+			.map((p) => p.textContent ?? '')
+			.join(' ')
+			.split(/\s+/)
+			.filter((m) => /[\p{L}\p{N}]/u.test(m)).length;
+
+		let debut = 0;
+		let mpm = 0;
+
+		const show = (name: string, focus?: HTMLElement | null) => {
+			steps.forEach((s) => (s.hidden = s.dataset.step !== name));
+			root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			focus?.focus({ preventScroll: true });
+		};
+
+		const majProjection = () => {
+			const min = Number(minutes.value);
+			const livres = (mpm * min * 182) / MOTS_PAR_LIVRE;
+			$('[data-minutes-label]').textContent = `${min} minutes`;
+			$('[data-livres]').textContent = livres < 10 ? livres.toFixed(1).replace('.', ',') : String(Math.round(livres));
+		};
+
+		$('[data-start]').addEventListener('click', () => {
+			show('lecture', texte);
+			debut = performance.now();
+		});
+
+		$('[data-fini]').addEventListener('click', () => {
+			const minutesLues = (performance.now() - debut) / 60000;
+			mpm = Math.round(nbMots / minutesLues);
+			show('quiz', form.querySelector('h3'));
+		});
+
+		form.addEventListener('submit', (e) => {
+			e.preventDefault();
+			const score = Array.from(new FormData(form).values()).filter((v) => v === '1').length;
+
+			$('[data-mpm]').textContent = String(mpm);
+			$('[data-score]').textContent = String(score);
+			$<HTMLElement>('[data-jauge-moyenne]').style.left = `${(moyenne / JAUGE_MAX) * 100}%`;
+			$<HTMLElement>('[data-jauge-vous]').style.left = `${Math.min(mpm / JAUGE_MAX, 1) * 100}%`;
+
+			let message: string;
+			if (mpm > 1000) {
+				message =
+					"Plus de 1 000 mots par minute : à ce rythme, on survole plus qu'on ne lit. Refaites le test en lisant comme vous liriez un livre, pour obtenir une mesure fiable.";
+			} else if (score < 2) {
+				message =
+					"Vous êtes allé·e vite, mais la compréhension a décroché. C'est exactement ce que la méthode évite : gagner en vitesse sans perdre le sens.";
+			} else if (mpm < moyenne - 30) {
+				message =
+					'Vous prenez le temps de bien comprendre, et c’est une excellente base. Avec quelques techniques, la même compréhension peut venir plus vite.';
+			} else if (mpm <= moyenne + 40) {
+				message =
+					'Vous êtes dans la moyenne des lecteurs francophones, avec une bonne compréhension. Il y a de la marge pour lire plus fluide.';
+			} else {
+				message =
+					'Vous lisez plus vite que la moyenne, en comprenant bien. Bravo ! La méthode vous aidera surtout à mémoriser et à adapter votre vitesse à chaque texte.';
+			}
+			$('[data-message]').textContent = message;
+			$<HTMLElement>('.projection').hidden = mpm > 1000;
+
+			majProjection();
+			show('resultat');
+		});
+
+		minutes.addEventListener('input', majProjection);
+
+		$('[data-restart]').addEventListener('click', () => {
+			form.reset();
+			minutes.value = '20';
+			show('intro');
+		});
+	});
+</script>
+
+<style>
+	.test {
+		max-width: 780px;
+		margin-inline: auto;
+		scroll-margin-top: 100px;
+	}
+
+	.test__panel {
+		padding: clamp(24px, 5vw, 56px);
+		border-radius: var(--radius-l);
+		background: var(--card);
+		box-shadow: var(--shadow);
+	}
+
+	.test__intro {
+		display: grid;
+		justify-items: center;
+		gap: 32px;
+		text-align: center;
+	}
+
+	.test__intro ul {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 12px 32px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-weight: 600;
+		color: var(--ink-soft);
+	}
+
+	.test__intro li {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.test__intro li :global(svg) {
+		width: 22px;
+		height: 22px;
+		color: var(--olive);
+	}
+
+	.test__texte {
+		max-width: 62ch;
+		margin-inline: auto;
+		outline: none;
+	}
+
+	.test__texte h3 {
+		margin-bottom: 24px;
+	}
+
+	.test__texte p {
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		line-height: 1.7;
+	}
+
+	.test__texte p + p {
+		margin-top: 1em;
+	}
+
+	.test__bar {
+		position: sticky;
+		bottom: 16px;
+		display: flex;
+		justify-content: center;
+		margin-top: 40px;
+	}
+
+	.test__bar .btn {
+		box-shadow: var(--shadow);
+	}
+
+	.test__quiz {
+		display: grid;
+		gap: 28px;
+	}
+
+	.test__quiz h3 {
+		outline: none;
+	}
+
+	fieldset {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		display: grid;
+		gap: 10px;
+	}
+
+	legend {
+		margin-bottom: 12px;
+		font-weight: 700;
+	}
+
+	fieldset label {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		padding: 12px 16px;
+		border: 1.5px solid var(--line);
+		border-radius: var(--radius-s);
+		cursor: pointer;
+		transition: border-color 0.2s, background-color 0.2s;
+	}
+
+	fieldset label:hover {
+		border-color: var(--brown);
+	}
+
+	fieldset label:has(input:checked) {
+		border-color: var(--brown);
+		background: color-mix(in srgb, var(--sand) 45%, transparent);
+	}
+
+	input[type='radio'] {
+		accent-color: var(--brown);
+		width: 18px;
+		height: 18px;
+		margin: 0;
+	}
+
+	.test__quiz .btn {
+		justify-self: start;
+	}
+
+	/* Résultat */
+
+	.resultat__top {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 24px;
+		align-items: end;
+	}
+
+	.resultat__label {
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--ink-muted);
+	}
+
+	.resultat__mpm {
+		font-family: var(--font-serif);
+		font-size: var(--step-5);
+		line-height: 1;
+		color: var(--brown);
+	}
+
+	.resultat__mpm small {
+		font-size: 0.32em;
+		color: var(--ink-soft);
+	}
+
+	.jauge {
+		margin: 56px 0 8px;
+	}
+
+	.jauge__piste {
+		position: relative;
+		height: 10px;
+		border-radius: 999px;
+		background: linear-gradient(90deg, var(--sand), color-mix(in srgb, var(--brown) 45%, var(--sand)));
+	}
+
+	.jauge__piste span {
+		position: absolute;
+		top: 50%;
+		translate: -50% -50%;
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+		border: 3px solid var(--card);
+		transition: left 0.8s cubic-bezier(0.3, 0.7, 0.2, 1);
+	}
+
+	.jauge__piste em {
+		position: absolute;
+		left: 50%;
+		translate: -50% 0;
+		font-style: normal;
+		font-size: 0.78rem;
+		font-weight: 700;
+		white-space: nowrap;
+	}
+
+	.jauge__moyenne {
+		background: var(--olive);
+	}
+
+	.jauge__moyenne em {
+		top: 22px;
+		color: var(--olive);
+	}
+
+	.jauge__vous {
+		background: var(--brown);
+	}
+
+	.jauge__vous em {
+		bottom: 22px;
+		color: var(--brown);
+	}
+
+	.resultat__message {
+		margin-top: 48px;
+		font-size: var(--step-1);
+		color: var(--ink-soft);
+	}
+
+	.projection {
+		margin-top: 36px;
+		padding: 28px;
+		border-radius: var(--radius);
+		background: var(--paper-deep);
+	}
+
+	.projection__slider {
+		display: grid;
+		gap: 14px;
+		margin-top: 16px;
+		color: var(--ink-soft);
+	}
+
+	input[type='range'] {
+		width: 100%;
+		accent-color: var(--brown);
+	}
+
+	.projection__resultat {
+		margin-top: 18px;
+		font-family: var(--font-serif);
+		font-size: var(--step-2);
+	}
+
+	.projection__resultat strong {
+		color: var(--brown);
+		font-weight: 600;
+	}
+
+	.projection__note {
+		margin-top: 6px;
+		font-size: 0.9rem;
+		color: var(--ink-muted);
+	}
+
+	.resultat__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-top: 36px;
+	}
+
+	@media (max-width: 520px) {
+		.resultat__actions .btn {
+			flex: 1 1 100%;
+		}
+	}
+</style>

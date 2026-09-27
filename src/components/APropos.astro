@@ -1,0 +1,110 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import portrait from '../assets/laila-portrait.jpg';
+import { site } from '../site';
+---
+
+<section class="section section--deep" id="a-propos">
+	<div class="container apropos">
+		<figure class="apropos__devise">
+			<blockquote>
+				<p>
+					<span class="accent">J'apprends,</span><br />j'expérimente<br />et je partage.
+				</p>
+			</blockquote>
+			<figcaption>
+				<Image src={portrait} alt="" widths={[96, 192]} sizes="96px" class="apropos__avatar" />
+				<span><strong>{site.name}</strong><br />{site.certification}</span>
+			</figcaption>
+		</figure>
+
+		<div class="apropos__texte">
+			<p class="eyebrow">À propos</p>
+			<h2>Bonjour, je suis <span class="accent">Laila</span>.</h2>
+			<hr class="rule" />
+			<!-- TODO(Laila) : texte provisoire, à réécrire avec son parcours réel. -->
+			<p>
+				Comme beaucoup d'entre nous, j'ai longtemps lu « comme à l'école » : mot à mot, en relisant, en
+				perdant le fil. Découvrir la lecture rapide a changé mon rapport aux livres — et au temps.
+			</p>
+			<p>
+				Je me suis formée et certifiée à la <strong>Méthode Boclet®</strong>, puis j'ai testé chaque
+				technique sur mes propres lectures avant de la transmettre. Aujourd'hui, j'accompagne celles et
+				ceux qui veulent lire plus, mieux, et avec plaisir.
+			</p>
+			<p>Sur Instagram, je partage chaque semaine des conseils et des exercices simples.</p>
+			<a class="btn btn--ghost" href={site.instagram} target="_blank" rel="noopener">
+				<Icon name="instagram" /> Suivre {site.instagramHandle}
+			</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.apropos {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: clamp(48px, 7vw, 96px);
+		align-items: center;
+	}
+
+	.apropos__devise {
+		margin: 0;
+		padding: clamp(32px, 5vw, 56px);
+		border-radius: var(--radius-l);
+		background: var(--card);
+		box-shadow: var(--shadow);
+	}
+
+	blockquote {
+		margin: 0;
+	}
+
+	blockquote p {
+		font-family: var(--font-serif);
+		font-size: var(--step-4);
+		line-height: 1.08;
+		letter-spacing: -0.015em;
+	}
+
+	figcaption {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		margin-top: 36px;
+		font-size: 0.92rem;
+		line-height: 1.4;
+		color: var(--ink-soft);
+	}
+
+	figcaption strong {
+		color: var(--ink);
+	}
+
+	.apropos__devise :global(.apropos__avatar) {
+		width: 64px;
+		height: 64px;
+		border-radius: 50%;
+		object-fit: cover;
+	}
+
+	.apropos__texte > p:not(.eyebrow) {
+		margin-top: 20px;
+		color: var(--ink-soft);
+	}
+
+	.apropos__texte .btn {
+		margin-top: 32px;
+	}
+
+	@media (max-width: 860px) {
+		.apropos {
+			grid-template-columns: 1fr;
+		}
+
+		.apropos__texte {
+			order: -1;
+		}
+	}
+</style>

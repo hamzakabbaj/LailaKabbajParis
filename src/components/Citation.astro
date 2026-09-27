@@ -1,0 +1,61 @@
+---
+interface Props {
+	texte: string;
+	auteur: string;
+	oeuvre: string;
+}
+
+const { texte, auteur, oeuvre } = Astro.props;
+---
+
+<section class="citation">
+	<figure class="container">
+		<svg class="citation__coeur" viewBox="0 0 160 24" fill="none" aria-hidden="true">
+			<path d="M0 14h58M102 14h58" stroke="currentColor" stroke-width="1.5"></path>
+			<path
+				d="M80 21s-9-5.5-9-11.5A5 5 0 0 1 80 7a5 5 0 0 1 9 2.5C89 15.5 80 21 80 21z"
+				stroke="currentColor"
+				stroke-width="1.5"
+				stroke-linejoin="round"></path>
+		</svg>
+		<blockquote>
+			<p>« {texte} »</p>
+		</blockquote>
+		<figcaption><strong>{auteur}</strong>, <cite>{oeuvre}</cite></figcaption>
+	</figure>
+</section>
+
+<style>
+	.citation {
+		padding-block: clamp(72px, 10vw, 120px);
+		text-align: center;
+	}
+
+	.citation__coeur {
+		width: 160px;
+		margin: 0 auto 36px;
+		color: var(--brown);
+	}
+
+	blockquote {
+		margin: 0 auto;
+		max-width: 40rem;
+	}
+
+	blockquote p {
+		font-family: var(--font-serif);
+		font-size: var(--step-4);
+		font-style: italic;
+		line-height: 1.15;
+		letter-spacing: -0.015em;
+	}
+
+	figcaption {
+		margin-top: 28px;
+		color: var(--ink-muted);
+	}
+
+	figcaption strong {
+		color: var(--ink);
+	}
+</style>

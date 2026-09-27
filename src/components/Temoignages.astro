@@ -1,0 +1,137 @@
+---
+import { getCollection } from 'astro:content';
+import { showPlaceholders } from '../site';
+
+const temoignages = (await getCollection('temoignages')).filter((t) => showPlaceholders || !t.data.placeholder);
+---
+
+{
+	temoignages.length > 0 && (
+		<section class="section" id="temoignages">
+			<div class="container">
+				<header class="section-head section-head--center">
+					<p class="eyebrow">Témoignages</p>
+					<h2>
+						Ils ont retrouvé <span class="accent">le fil</span>
+					</h2>
+				</header>
+
+				<div class="temoignages">
+					{temoignages.map(({ data }) => (
+						<figure class:list={['temoignage', { 'temoignage--placeholder': data.placeholder }]}>
+							{data.placeholder && (
+								<span class="temoignage__tag" title="Témoignage fictif, masqué en production">
+									Exemple
+								</span>
+							)}
+							<svg class="temoignage__quote" viewBox="0 0 40 32" aria-hidden="true">
+								<path d="M0 32V19C0 8 6 1.5 16 0l2 4.5C12 6.5 9.5 10.5 9.5 15H17v17zm23 0V19C23 8 29 1.5 39 0l2 4.5c-6 2-8.5 6-8.5 10.5H40v17z" />
+							</svg>
+							<blockquote>
+								<p>{data.citation}</p>
+							</blockquote>
+							{data.resultat && <p class="temoignage__resultat">{data.resultat}</p>}
+							<figcaption>
+								<span class="temoignage__initiale" aria-hidden="true">
+									{data.nom.charAt(0)}
+								</span>
+								<span>
+									<strong>{data.nom}</strong>
+									<br />
+									{data.contexte}
+								</span>
+							</figcaption>
+						</figure>
+					))}
+				</div>
+			</div>
+		</section>
+	)
+}
+
+<style>
+	.temoignages {
+		columns: 2 320px;
+		column-gap: 24px;
+	}
+
+	.temoignage {
+		position: relative;
+		break-inside: avoid;
+		margin: 0 0 24px;
+		padding: clamp(28px, 3.5vw, 40px);
+		border-radius: var(--radius-l);
+		background: var(--card);
+		border: 1.5px solid var(--line);
+	}
+
+	.temoignage--placeholder {
+		border-style: dashed;
+	}
+
+	.temoignage__tag {
+		position: absolute;
+		top: 18px;
+		right: 18px;
+		padding: 3px 10px;
+		border-radius: 999px;
+		background: var(--sand);
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--ink-muted);
+	}
+
+	.temoignage__quote {
+		width: 34px;
+		fill: var(--sand);
+	}
+
+	blockquote {
+		margin: 20px 0 0;
+	}
+
+	blockquote p {
+		font-family: var(--font-serif);
+		font-size: var(--step-1);
+		line-height: 1.5;
+	}
+
+	.temoignage__resultat {
+		display: inline-block;
+		margin-top: 18px;
+		padding: 4px 12px;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--sage) 22%, transparent);
+		color: var(--olive);
+		font-size: 0.86rem;
+		font-weight: 700;
+	}
+
+	figcaption {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		margin-top: 24px;
+		font-size: 0.92rem;
+		line-height: 1.4;
+		color: var(--ink-muted);
+	}
+
+	figcaption strong {
+		color: var(--ink);
+	}
+
+	.temoignage__initiale {
+		display: grid;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: var(--olive);
+		color: #fff;
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+	}
+</style>

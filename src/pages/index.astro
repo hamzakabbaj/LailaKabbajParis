@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Probleme from '../components/Probleme.astro';
+import Chiffres from '../components/Chiffres.astro';
+import Methode from '../components/Methode.astro';
+import TestVitesse from '../components/TestVitesse.astro';
+import Formations from '../components/Formations.astro';
+import Temoignages from '../components/Temoignages.astro';
+import APropos from '../components/APropos.astro';
+import Citation from '../components/Citation.astro';
+import FAQ from '../components/FAQ.astro';
+import CTAFinal from '../components/CTAFinal.astro';
+---
+
+<Base>
+	<Hero />
+	<Probleme />
+	<Chiffres />
+	<Methode />
+	<TestVitesse />
+	<Formations />
+	<Temoignages />
+	<APropos />
+	<Citation
+		texte="Quand on lit trop vite ou trop doucement, on n'entend rien."
+		auteur="Blaise Pascal"
+		oeuvre="Pensées"
+	/>
+	<FAQ />
+	<CTAFinal />
+</Base>

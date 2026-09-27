@@ -1,0 +1,25 @@
+---
+import Page from '../layouts/Page.astro';
+import { site } from '../site';
+---
+
+<Page title="Politique de confidentialité">
+	<p class="todo">
+		À compléter selon les outils retenus (paiement, e-mails, mesure d'audience). Le site ne dépose
+		aujourd'hui aucun cookie publicitaire ni de suivi, et les polices sont hébergées sur notre propre
+		serveur.
+	</p>
+
+	<h2>Données collectées</h2>
+	<p>
+		Lors d'un achat : nom, adresse e-mail et informations de paiement, traitées par notre prestataire de
+		paiement [à compléter]. Le résultat du test de vitesse de lecture reste dans votre navigateur et
+		n'est jamais envoyé.
+	</p>
+
+	<h2>Vos droits</h2>
+	<p>
+		Vous pouvez demander l'accès, la rectification ou la suppression de vos données en écrivant à
+		<a href={`mailto:${site.email}`}>{site.email}</a>. Vous pouvez aussi saisir la CNIL.
+	</p>
+</Page>

@@ -1,0 +1,152 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+	<div class="container footer__inner">
+		<div class="footer__brand">
+			<p class="footer__name">{site.name}</p>
+			<p class="footer__devise">« {site.devise} »</p>
+			<p class="footer__cert">{site.certification}</p>
+		</div>
+
+		<nav aria-label="Liens utiles">
+			<p class="footer__title">Le site</p>
+			<ul>
+				<li><a href="/#formations">Formations</a></li>
+				<li><a href="/#test">Test de vitesse</a></li>
+				<li><a href="/#faq">Questions fréquentes</a></li>
+			</ul>
+		</nav>
+
+		<nav aria-label="Informations légales">
+			<p class="footer__title">Informations</p>
+			<ul>
+				<li><a href="/mentions-legales">Mentions légales</a></li>
+				<li><a href="/cgv">Conditions générales de vente</a></li>
+				<li><a href="/confidentialite">Confidentialité</a></li>
+			</ul>
+		</nav>
+
+		<div>
+			<p class="footer__title">Me suivre</p>
+			<ul>
+				<li>
+					<a class="footer__social" href={site.instagram} rel="noopener" target="_blank">
+						<Icon name="instagram" /> {site.instagramHandle}
+					</a>
+				</li>
+				<li>
+					<a class="footer__social" href={`mailto:${site.email}`}><Icon name="mail" /> {site.email}</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="container footer__bottom">
+		<p>© {year} {site.name}. Tous droits réservés.</p>
+		<p>Méthode Boclet® est une marque déposée.</p>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		background: var(--ink);
+		color: #e9e1d6;
+		padding-top: clamp(56px, 8vw, 88px);
+	}
+
+	.footer__inner {
+		display: grid;
+		grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+		gap: 40px;
+	}
+
+	.footer__name {
+		font-family: var(--font-serif);
+		font-size: 2rem;
+		color: #fff;
+	}
+
+	.footer__devise {
+		margin-top: 8px;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.1rem;
+	}
+
+	.footer__cert {
+		margin-top: 16px;
+		font-size: 0.88rem;
+		color: #b9ad9e;
+	}
+
+	.footer__title {
+		margin-bottom: 14px;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: #c79a78;
+	}
+
+	ul {
+		display: grid;
+		gap: 10px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	a {
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+
+	a:hover {
+		color: #fff;
+	}
+
+	.footer__social {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		overflow-wrap: anywhere;
+	}
+
+	.footer__social :global(svg) {
+		width: 18px;
+		height: 18px;
+		flex: none;
+	}
+
+	.footer__bottom {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 8px 24px;
+		margin-top: 56px;
+		padding-block: 24px;
+		border-top: 1px solid #3a342d;
+		font-size: 0.85rem;
+		color: #9d9284;
+	}
+
+	@media (max-width: 860px) {
+		.footer__inner {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.footer__brand {
+			grid-column: 1 / -1;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.footer__inner {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

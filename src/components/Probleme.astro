@@ -1,0 +1,167 @@
+---
+import Icon from './Icon.astro';
+
+const symptomes = [
+	{ icon: 'book', texte: 'Vous commencez beaucoup de livres…' },
+	{ icon: 'clock', texte: 'Puis vous manquez de temps.' },
+	{ icon: 'tangle', texte: 'Vous perdez le fil.' },
+	{ icon: 'heart', texte: 'Et vous culpabilisez de les abandonner.' },
+] as const;
+---
+
+<section class="section" id="probleme">
+	<div class="container probleme">
+		<div>
+			<p class="eyebrow">La frustration de ne jamais finir un livre</p>
+			<h2>Vous vous <span class="accent">reconnaissez</span>&nbsp;?</h2>
+			<ul class="symptomes">
+				{
+					symptomes.map((s) => (
+						<li>
+							<span class="icon-badge">
+								<Icon name={s.icon} />
+							</span>
+							{s.texte}
+						</li>
+					))
+				}
+			</ul>
+		</div>
+
+		<div class="probleme__right">
+			<article class="card-vrai">
+				<h3>Le vrai problème n'est pas votre motivation.</h3>
+				<hr class="rule" />
+				<p>
+					Nous lisons comme on nous l'a appris à l'école : mot à mot, en revenant souvent en arrière,
+					l'esprit qui vagabonde. Ces habitudes ralentissent notre cerveau.
+				</p>
+				<p class="card-vrai__result">
+					Résultat&nbsp;: la lecture demande trop d'effort et devient frustrante.
+				</p>
+			</article>
+
+			<div class="pas-est">
+				<div>
+					<p class="pas-est__title">La lecture rapide, ce n'est <span class="accent">pas</span>…</p>
+					<ul>
+						<li><Icon name="cross" /> Lire en diagonale</li>
+						<li><Icon name="cross" /> Sauter des informations</li>
+					</ul>
+				</div>
+				<div>
+					<p class="pas-est__title">C'est…</p>
+					<ul>
+						<li class="ok"><Icon name="check" /> Lire plus efficacement</li>
+						<li class="ok"><Icon name="check" /> Comprendre plus vite</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.probleme {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: clamp(48px, 7vw, 96px);
+		align-items: start;
+	}
+
+	.symptomes {
+		display: grid;
+		gap: 22px;
+		margin: 44px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.symptomes li {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		font-size: var(--step-1);
+	}
+
+	.card-vrai {
+		padding: clamp(28px, 4vw, 44px);
+		border-radius: var(--radius-l);
+		background: var(--card);
+		box-shadow: var(--shadow);
+	}
+
+	.card-vrai p {
+		margin-top: 20px;
+		color: var(--ink-soft);
+	}
+
+	.card-vrai .card-vrai__result {
+		font-weight: 700;
+		color: var(--brown);
+	}
+
+	.pas-est {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 24px;
+		margin-top: 24px;
+		padding: clamp(24px, 3.5vw, 36px);
+		border: 1.5px solid var(--line);
+		border-radius: var(--radius-l);
+	}
+
+	.pas-est__title {
+		margin-bottom: 14px;
+		font-family: var(--font-serif);
+		font-size: var(--step-1);
+		line-height: 1.25;
+	}
+
+	.pas-est .accent {
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.pas-est ul {
+		display: grid;
+		gap: 10px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.pas-est li {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		color: var(--ink-muted);
+	}
+
+	.pas-est li.ok {
+		color: var(--ink);
+		font-weight: 600;
+	}
+
+	.pas-est li :global(svg) {
+		width: 20px;
+		height: 20px;
+		flex: none;
+	}
+
+	.pas-est li.ok :global(svg) {
+		color: var(--olive);
+	}
+
+	@media (max-width: 860px) {
+		.probleme {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 440px) {
+		.pas-est {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

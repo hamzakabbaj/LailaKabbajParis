@@ -1,0 +1,213 @@
+---
+import { getCollection } from 'astro:content';
+import Icon from './Icon.astro';
+import { formatPrix } from '../site';
+
+const formations = (await getCollection('formations')).sort((a, b) => a.data.ordre - b.data.ordre);
+---
+
+<section class="section" id="formations">
+	<div class="container">
+		<header class="section-head section-head--center">
+			<p class="eyebrow">Les formations</p>
+			<h2>Choisissez <span class="accent">votre rythme</span></h2>
+			<p>Un atelier pour découvrir, un programme complet pour progresser, un accompagnement pour aller plus loin.</p>
+		</header>
+
+		<div class="offres">
+			{
+				formations.map(({ id, data }) => (
+					<article class:list={['offre', { 'offre--star': data.misEnAvant }]}>
+						{data.misEnAvant && <p class="offre__flag">Le plus choisi</p>}
+						<p class="offre__format">{data.format}</p>
+						<h3>{data.titre}</h3>
+						<p class="offre__accroche">{data.accroche}</p>
+						<p class="offre__prix">
+							<span class="offre__montant">{formatPrix(data.prix)}</span>
+							<span class="offre__duree">{data.duree}</span>
+						</p>
+						<ul class="offre__inclus">
+							{data.inclus.map((item) => (
+								<li>
+									<Icon name="check" /> {item}
+								</li>
+							))}
+						</ul>
+						<a
+							class:list={['btn', data.misEnAvant ? 'btn--primary' : 'btn--ghost']}
+							href={`/formations/${id}`}
+						>
+							Voir le programme <Icon name="arrow" />
+						</a>
+					</article>
+				))
+			}
+		</div>
+
+		<p class="offres__note">
+			<Icon name="lock" /> Paiement sécurisé · Accès envoyé par e-mail après l'achat
+		</p>
+	</div>
+</section>
+
+<style>
+	.offres {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 24px;
+		align-items: stretch;
+	}
+
+	.offre {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		padding: clamp(28px, 3.5vw, 40px);
+		border-radius: var(--radius-l);
+		background: var(--card);
+		border: 1.5px solid var(--line);
+	}
+
+	.offre--star {
+		background: var(--ink);
+		color: #efe7dc;
+		border-color: var(--ink);
+		box-shadow: var(--shadow);
+	}
+
+	.offre__flag {
+		position: absolute;
+		top: -14px;
+		left: 50%;
+		translate: -50% 0;
+		padding: 5px 16px;
+		border-radius: 999px;
+		background: var(--brown);
+		color: #fff;
+		font-size: 0.8rem;
+		font-weight: 700;
+		white-space: nowrap;
+	}
+
+	.offre__format {
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--brown);
+	}
+
+	.offre--star .offre__format {
+		color: #d9a882;
+	}
+
+	.offre h3 {
+		margin-top: 12px;
+		font-size: var(--step-3);
+	}
+
+	.offre--star h3 {
+		color: #fff;
+	}
+
+	.offre__accroche {
+		margin-top: 14px;
+		color: var(--ink-soft);
+	}
+
+	.offre--star .offre__accroche {
+		color: #cdc3b6;
+	}
+
+	.offre__prix {
+		display: flex;
+		align-items: baseline;
+		flex-wrap: wrap;
+		gap: 4px 14px;
+		margin-top: 28px;
+		padding-top: 24px;
+		border-top: 1px solid var(--line);
+	}
+
+	.offre--star .offre__prix {
+		border-color: #3d362e;
+	}
+
+	.offre__montant {
+		font-family: var(--font-serif);
+		font-size: var(--step-4);
+		line-height: 1;
+	}
+
+	.offre--star .offre__montant {
+		color: #fff;
+	}
+
+	.offre__duree {
+		font-size: 0.92rem;
+		color: var(--ink-muted);
+	}
+
+	.offre--star .offre__duree {
+		color: #b3a899;
+	}
+
+	.offre__inclus {
+		display: grid;
+		gap: 10px;
+		margin: 24px 0 32px;
+		padding: 0;
+		list-style: none;
+		font-size: 0.97rem;
+	}
+
+	.offre__inclus li {
+		display: flex;
+		gap: 10px;
+		line-height: 1.45;
+	}
+
+	.offre__inclus :global(svg) {
+		flex: none;
+		width: 18px;
+		height: 18px;
+		margin-top: 2px;
+		color: var(--olive);
+	}
+
+	.offre--star .offre__inclus :global(svg) {
+		color: var(--sage);
+	}
+
+	.offre .btn {
+		margin-top: auto;
+	}
+
+	.offre--star .btn--primary:hover {
+		background: #8d5733;
+	}
+
+	.offres__note {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		margin-top: 32px;
+		font-size: 0.92rem;
+		color: var(--ink-muted);
+	}
+
+	.offres__note :global(svg) {
+		width: 18px;
+		height: 18px;
+	}
+
+	@media (max-width: 960px) {
+		.offres {
+			grid-template-columns: 1fr;
+			max-width: 560px;
+			margin-inline: auto;
+			gap: 36px;
+		}
+	}
+</style>

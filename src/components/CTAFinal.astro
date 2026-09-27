@@ -1,0 +1,69 @@
+---
+import Icon from './Icon.astro';
+---
+
+<section class="cta">
+	<div class="container">
+		<div class="cta__box">
+			<svg class="cta__fil" viewBox="0 0 600 120" fill="none" aria-hidden="true">
+				<path
+					d="M0 90c60 0 90-10 120-40 22-22 52-20 50 6-2 24-40 30-44 6-4-26 34-44 62-26 40 26 24 64 80 64h332"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"></path>
+			</svg>
+			<h2>Et si vous retrouviez <span class="accent">le fil</span>&nbsp;?</h2>
+			<p>
+				Combien de livres pourriez-vous avoir lus dans six mois, si vous lisiez simplement autrement&nbsp;?
+			</p>
+			<div class="cta__actions">
+				<a class="btn btn--primary" href="#formations">Choisir ma formation <Icon name="arrow" /></a>
+				<a class="btn btn--ghost" href="#test">Mesurer ma vitesse d'abord</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.cta {
+		padding-block: var(--section-y);
+	}
+
+	.cta__box {
+		position: relative;
+		overflow: hidden;
+		padding: clamp(48px, 8vw, 96px) clamp(24px, 6vw, 80px);
+		border-radius: var(--radius-l);
+		background: var(--sand);
+		text-align: center;
+	}
+
+	.cta__fil {
+		position: absolute;
+		left: -40px;
+		bottom: 8px;
+		width: min(70%, 600px);
+		color: color-mix(in srgb, var(--brown) 45%, transparent);
+	}
+
+	h2,
+	p,
+	.cta__actions {
+		position: relative;
+	}
+
+	p {
+		max-width: 34rem;
+		margin: 20px auto 0;
+		font-size: var(--step-1);
+		color: var(--ink-soft);
+	}
+
+	.cta__actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 14px;
+		margin-top: 36px;
+	}
+</style>

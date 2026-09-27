@@ -1,0 +1,218 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import portrait from '../assets/laila-portrait.jpg';
+import { site } from '../site';
+---
+
+<section class="hero">
+	<div class="container hero__inner">
+		<div class="hero__text">
+			<p class="eyebrow">Lecture rapide · Paris & en ligne</p>
+			<h1>Finissez enfin les livres <span class="accent">que vous commencez.</span></h1>
+			<p class="hero__lead">
+				Des formations en lecture rapide, mémorisation et mind mapping pour lire plus efficacement,
+				comprendre plus vite et retrouver le plaisir de lire — sans lire en diagonale.
+			</p>
+			<div class="hero__actions">
+				<a class="btn btn--primary" href="#formations">Découvrir les formations <Icon name="arrow" /></a>
+				<a class="btn btn--ghost" href="#test">Mesurer ma vitesse · 2 min</a>
+			</div>
+			<ul class="hero__pillars" aria-label="Les trois piliers">
+				{site.piliers.map((p) => <li>{p}</li>)}
+			</ul>
+		</div>
+
+		<div class="hero__visual">
+			<svg class="thread" viewBox="0 0 420 220" fill="none" aria-hidden="true">
+				<path
+					pathLength="1"
+					d="M8 150c30-8 52-40 78-72 22-27 58-30 62 2 4 28-40 52-58 30-18-22 12-62 44-58 30 4 32 44 8 64-22 18-60 2-50-30 9-28 52-34 70-8 22 32 10 70 60 84 50 14 120 8 190 4"
+				></path>
+			</svg>
+			<div class="portrait">
+				<Image
+					src={portrait}
+					alt="Portrait de Laila Kabbaj, formatrice en lecture rapide"
+					widths={[320, 427]}
+					sizes="(max-width: 720px) 72vw, 360px"
+					loading="eager"
+					fetchpriority="high"
+				/>
+			</div>
+			<div class="badge badge--cert">
+				<span class="icon-badge icon-badge--olive"><Icon name="award" /></span>
+				<p><strong>Formatrice certifiée</strong><br />Méthode Boclet®</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		position: relative;
+		overflow: hidden;
+		padding-block: clamp(40px, 7vw, 88px) clamp(24px, 4vw, 48px);
+	}
+
+	.hero__inner {
+		display: grid;
+		grid-template-columns: 1.15fr 0.85fr;
+		align-items: center;
+		gap: clamp(40px, 6vw, 88px);
+	}
+
+	.hero h1 {
+		font-size: clamp(2.6rem, 1.9rem + 3.3vw, 4.6rem);
+	}
+
+	.hero__lead {
+		max-width: 34rem;
+		margin-top: 28px;
+		font-size: var(--step-1);
+		color: var(--ink-soft);
+	}
+
+	.hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 14px;
+		margin-top: 36px;
+	}
+
+	.hero__pillars {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px 22px;
+		margin: 40px 0 0;
+		padding: 0;
+		list-style: none;
+		font-weight: 600;
+		color: var(--ink-soft);
+	}
+
+	.hero__pillars li {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.hero__pillars li::before {
+		content: '';
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--sage);
+	}
+
+	/* ---------- Visuel ---------- */
+
+	.hero__visual {
+		position: relative;
+		justify-self: center;
+		width: min(100%, 380px);
+		padding-bottom: 24px;
+	}
+
+	.portrait {
+		position: relative;
+		aspect-ratio: 4 / 5;
+		border-radius: 999px 999px var(--radius-l) var(--radius-l);
+		overflow: hidden;
+		background: var(--sand);
+		box-shadow: var(--shadow);
+	}
+
+	.portrait :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 30%;
+	}
+
+	.thread {
+		position: absolute;
+		left: -12%;
+		bottom: -9%;
+		width: 100%;
+		z-index: 2;
+		pointer-events: none;
+	}
+
+	.thread path {
+		stroke: var(--brown);
+		stroke-width: 2.2;
+		stroke-linecap: round;
+		stroke-dasharray: 1;
+		stroke-dashoffset: 1;
+		animation: draw 2.6s 0.3s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+	}
+
+	@keyframes draw {
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
+
+	.badge {
+		position: absolute;
+		z-index: 3;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		padding: 12px 18px 12px 12px;
+		border-radius: 999px;
+		background: var(--card);
+		box-shadow: var(--shadow);
+		font-size: 0.86rem;
+		line-height: 1.35;
+		text-decoration: none;
+	}
+
+	.badge .icon-badge {
+		width: 42px;
+		height: 42px;
+	}
+
+	.badge .icon-badge :global(svg) {
+		width: 20px;
+		height: 20px;
+	}
+
+	/* Le badge reste sur la veste, sous le visage. */
+	.badge--cert {
+		right: -14%;
+		bottom: 9%;
+	}
+
+	@media (max-width: 900px) {
+		.hero__inner {
+			grid-template-columns: 1fr;
+		}
+
+		.hero__visual {
+			width: min(78%, 340px);
+			margin-top: 8px;
+		}
+
+		.badge--cert {
+			right: -12%;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.badge {
+			font-size: 0.78rem;
+			padding: 8px 14px 8px 8px;
+		}
+
+		.badge--cert {
+			right: -12%;
+			bottom: 7%;
+		}
+
+		.hero__actions .btn {
+			flex: 1 1 100%;
+		}
+	}
+</style>

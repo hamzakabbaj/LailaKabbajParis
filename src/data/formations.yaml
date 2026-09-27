@@ -1,0 +1,81 @@
+# Catalogue des formations — source unique (accueil, pages détail, paiement).
+# TODO(Laila) : formats, durées et prix sont des propositions à valider.
+# checkoutUrl : coller ici le lien de paiement (ex. Stripe Payment Link) quand il existe.
+
+- id: atelier-declic
+  ordre: 1
+  titre: L'Atelier Déclic
+  accroche: Deux heures en direct pour comprendre ce qui ralentit votre lecture et repartir avec vos trois premières techniques.
+  format: En ligne, en direct · petit groupe
+  duree: 2 h
+  prix: 39
+  pourQui:
+    - Vous êtes curieux·se de la lecture rapide et voulez essayer avant de vous engager.
+    - Vous voulez mesurer votre vitesse de lecture actuelle.
+  inclus:
+    - Un atelier en direct (8 participants maximum)
+    - La mesure de votre vitesse et de votre compréhension
+    - Trois techniques applicables dès le soir même
+    - La fiche récapitulative en PDF
+  programme:
+    - titre: Diagnostic
+      description: Mesurer votre vitesse et votre compréhension de départ.
+    - titre: Ce qui vous ralentit
+      description: Relectures, mot à mot, distractions — repérer vos habitudes.
+    - titre: Trois techniques
+      description: Le guide visuel, la lecture par groupes de mots et le survol préalable.
+
+- id: lire-mieux-lire-plus
+  ordre: 2
+  titre: Lire mieux, lire plus
+  accroche: Le programme complet pour lire plus efficacement, mémoriser l'essentiel et finir enfin les livres que vous commencez.
+  format: En ligne · à votre rythme
+  duree: 6 modules · environ 6 h
+  prix: 147
+  misEnAvant: true
+  pourQui:
+    - Vous commencez beaucoup de livres mais en finissez peu.
+    - Vous lisez beaucoup pour vos études ou votre travail et manquez de temps.
+    - Vous perdez le fil et devez relire.
+  inclus:
+    - 6 modules vidéo courts
+    - Des exercices d'entraînement progressifs
+    - Des fiches mémo et un modèle de mind map à imprimer
+    - Un suivi de votre vitesse semaine après semaine
+    - L'accès à vie et aux mises à jour
+  programme:
+    - titre: Votre point de départ
+      description: Mesurer, comprendre comment l'œil lit, fixer un objectif réaliste.
+    - titre: Les bases de la lecture rapide
+      description: Guide visuel, groupes de mots, moins de retours en arrière inutiles.
+    - titre: Lire avec une intention
+      description: Survoler, poser ses questions, adapter sa vitesse au texte.
+    - titre: Mémoriser ce que l'on lit
+      description: Techniques de mémorisation et révisions espacées.
+    - titre: Le mind mapping
+      description: Résumer un livre ou un chapitre sur une seule page.
+    - titre: Ancrer l'habitude
+      description: Un plan de 30 jours pour que la méthode devienne naturelle.
+
+- id: accompagnement
+  ordre: 3
+  titre: L'Accompagnement
+  accroche: Le programme complet, plus quatre séances individuelles pour adapter la méthode à vos lectures et à vos objectifs.
+  format: En ligne + séances individuelles (visio ou Paris)
+  duree: 6 semaines
+  prix: 390
+  pourQui:
+    - Vous préparez un examen ou un concours et devez lire beaucoup, vite.
+    - Vous voulez un suivi personnalisé et des retours sur votre pratique.
+  inclus:
+    - Tout le programme « Lire mieux, lire plus »
+    - 4 séances individuelles de 45 min (visio ou à Paris)
+    - Un plan d'entraînement adapté à vos lectures
+    - Un échange par message entre les séances
+  programme:
+    - titre: Séance 1 — Bilan
+      description: Vos objectifs, vos lectures, votre vitesse de départ.
+    - titre: Séances 2 et 3 — Pratique guidée
+      description: Corrections, exercices ciblés, mind maps sur vos propres documents.
+    - titre: Séance 4 — Autonomie
+      description: Mesure finale et plan pour continuer seul·e.

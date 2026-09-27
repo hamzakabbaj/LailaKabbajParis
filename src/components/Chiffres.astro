@@ -1,0 +1,239 @@
+---
+// Chiffres sourcés (vérifiés en septembre 2026). Garder la source à côté de chaque chiffre.
+const chiffres = [
+	{
+		valeur: '68 %',
+		texte: 'des lecteurs disent ne pas avoir le temps de lire davantage.',
+		source: 'CNL / Ipsos, Les Français et la lecture, 2025',
+		href: 'https://centrenationaldulivre.fr/sites/default/files/2025-04/Barom%C3%A8tre%20Les%20Fran%C3%A7ais%20et%20la%20lecture%20Rapport%20complet%202025-04-08.pdf',
+	},
+	{
+		valeur: '32 %',
+		texte: "n'arrivent pas à se concentrer suffisamment pour lire.",
+		source: 'CNL / Ipsos, 2025',
+		href: 'https://centrenationaldulivre.fr/sites/default/files/2025-04/Barom%C3%A8tre%20Les%20Fran%C3%A7ais%20et%20la%20lecture%20Rapport%20complet%202025-04-08.pdf',
+	},
+	{
+		valeur: '31 min',
+		texte: 'de lecture de livres par jour, contre 3 h 21 d’écrans sur le temps libre.',
+		source: 'CNL / Ipsos, 2025',
+		href: 'https://centrenationaldulivre.fr/sites/default/files/2025-04/Barom%C3%A8tre%20Les%20Fran%C3%A7ais%20et%20la%20lecture%20Rapport%20complet%202025-04-08.pdf',
+	},
+	{
+		valeur: '214',
+		texte: 'mots par minute : la vitesse moyenne de lecture silencieuse en français.',
+		source: 'Brysbaert, Journal of Memory and Language, 2019',
+		href: 'https://doi.org/10.1016/j.jml.2019.104047',
+	},
+];
+
+// Phrase découpée en points de fixation, numérotés dans l'ordre du regard.
+// `retour` = numéro de la fixation où le regard revient en arrière sur ce groupe de mots.
+const fixations = [
+	{ mot: 'Nos yeux ', n: 1 },
+	{ mot: 'ne glissent ', n: 2, retour: 5 },
+	{ mot: 'pas sur ', n: 3 },
+	{ mot: 'la ligne : ', n: 4 },
+	{ mot: 'ils avancent ', n: 6 },
+	{ mot: 'par petits ', n: 7 },
+	{ mot: 'sauts.', n: 8 },
+];
+---
+
+<section class="section" id="chiffres">
+	<div class="container">
+		<header class="section-head section-head--center">
+			<p class="eyebrow">Ce n'est pas qu'une impression</p>
+			<h2>Nous lisons moins… <span class="accent">et pas par manque d'envie</span></h2>
+		</header>
+
+		<dl class="chiffres">
+			{
+				chiffres.map((c) => (
+					<div class="chiffre">
+						<dt>{c.valeur}</dt>
+						<dd>
+							{c.texte}
+							<a class="chiffre__source" href={c.href} target="_blank" rel="noopener">
+								{c.source}
+							</a>
+						</dd>
+					</div>
+				))
+			}
+		</dl>
+
+		<figure class="oeil">
+			<p class="oeil__ligne" aria-hidden="true">
+				{
+					fixations.map((f) => (
+						<span class:list={['fix', { 'fix--retour': f.retour }]} data-n={f.n} data-r={f.retour}>
+							{f.mot}
+						</span>
+					))
+				}
+			</p>
+			<figcaption>
+				<p class="visually-hidden">
+					Illustration : une phrase avec les points où le regard s'arrête, dont un retour en arrière.
+				</p>
+				<h3>Comment lit notre œil</h3>
+				<p>
+					Le regard avance par sauts de 7 à 9 lettres et s'arrête 200 à 250 millisecondes sur chaque point.
+					Dans 10 à 15 % des cas, il revient en arrière. Une partie de ces retours nous aide à comprendre ;
+					les autres sont des habitudes que l'on peut apprendre à alléger.
+				</p>
+				<a class="chiffre__source" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2906818/" target="_blank" rel="noopener">
+					Rayner, Quarterly Journal of Experimental Psychology, 2009
+				</a>
+			</figcaption>
+		</figure>
+	</div>
+</section>
+
+<style>
+	.chiffres {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 0;
+		margin: 0;
+		border-block: 1.5px solid var(--line);
+	}
+
+	.chiffre {
+		padding: 36px 28px;
+	}
+
+	.chiffre + .chiffre {
+		border-left: 1.5px solid var(--line);
+	}
+
+	dt {
+		font-family: var(--font-serif);
+		font-size: var(--step-4);
+		white-space: nowrap;
+		line-height: 1;
+		color: var(--brown);
+		letter-spacing: -0.02em;
+	}
+
+	dd {
+		margin: 14px 0 0;
+		color: var(--ink-soft);
+		line-height: 1.5;
+	}
+
+	.chiffre__source {
+		display: block;
+		margin-top: 12px;
+		font-size: 0.78rem;
+		color: var(--ink-muted);
+		text-decoration-color: var(--line);
+		text-underline-offset: 3px;
+	}
+
+	.oeil {
+		display: grid;
+		grid-template-columns: 1.2fr 0.8fr;
+		gap: clamp(32px, 5vw, 64px);
+		align-items: center;
+		margin: clamp(56px, 8vw, 88px) 0 0;
+		padding: clamp(28px, 4vw, 48px);
+		border-radius: var(--radius-l);
+		background: var(--card);
+	}
+
+	.oeil__ligne {
+		font-family: var(--font-serif);
+		font-size: var(--step-3);
+		line-height: 2.4;
+	}
+
+	.oeil > * {
+		min-width: 0;
+	}
+
+	.fix {
+		position: relative;
+	}
+
+	.fix::before {
+		content: attr(data-n);
+		position: absolute;
+		left: 50%;
+		top: 0;
+		translate: -50% -60%;
+		display: grid;
+		place-items: center;
+		width: 1.35em;
+		height: 1.35em;
+		border-radius: 50%;
+		background: var(--olive);
+		color: #fff;
+		font-family: var(--font-sans);
+		font-size: 0.4em;
+		font-weight: 700;
+		line-height: 1;
+	}
+
+	.fix--retour::after {
+		content: attr(data-r) " ↩";
+		position: absolute;
+		left: 50%;
+		top: 100%;
+		translate: -50% 10%;
+		padding: 0.15em 0.6em;
+		border-radius: 999px;
+		background: var(--brown);
+		color: #fff;
+		font-family: var(--font-sans);
+		font-size: 0.36em;
+		font-weight: 700;
+		line-height: 1.4;
+		white-space: nowrap;
+	}
+
+	.fix--retour {
+		text-decoration: underline wavy color-mix(in srgb, var(--brown) 55%, transparent);
+		text-underline-offset: 0.3em;
+		text-decoration-thickness: 1.5px;
+	}
+
+	.oeil figcaption p:not(.visually-hidden) {
+		margin-top: 12px;
+		color: var(--ink-soft);
+	}
+
+	@media (max-width: 960px) {
+		.chiffres {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.chiffre:nth-child(3) {
+			border-left: 0;
+		}
+
+		.chiffre:nth-child(n + 3) {
+			border-top: 1.5px solid var(--line);
+		}
+
+		.oeil {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.chiffres {
+			grid-template-columns: 1fr;
+		}
+
+		.chiffre + .chiffre {
+			border-left: 0;
+			border-top: 1.5px solid var(--line);
+		}
+
+		.chiffre {
+			padding-inline: 0;
+		}
+	}
+</style>

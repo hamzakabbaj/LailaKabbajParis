@@ -1,0 +1,126 @@
+---
+import Icon from './Icon.astro';
+
+// TODO(Laila) : valider les réponses sur l'accès, le remboursement et la Méthode Boclet®.
+const questions = [
+	{
+		q: 'Si je lis plus vite, vais-je moins bien comprendre ?',
+		r: "C'est la crainte la plus fréquente, et elle est légitime : lire vite en sacrifiant le sens n'a aucun intérêt. L'objectif n'est pas la vitesse à tout prix, mais l'efficacité. Nous mesurons toujours la compréhension en même temps que la vitesse, et vous apprenez à adapter votre rythme au texte : on ne lit pas un roman comme un rapport. Sinon, on finit comme Woody Allen : « J'ai suivi un cours de lecture rapide et lu Guerre et Paix en vingt minutes. Ça parle de la Russie. »",
+	},
+	{
+		q: 'En combien de temps verrai-je des résultats ?',
+		r: "Les premières techniques se ressentent dès les premiers jours. Pour qu'elles deviennent naturelles, comptez quelques semaines d'entraînement régulier, à raison d'une quinzaine de minutes par jour, avec vos propres lectures.",
+	},
+	{
+		q: "J'ai toujours lu lentement. Est-ce pour moi ?",
+		r: "Oui. La plupart d'entre nous n'ont jamais appris à lire autrement qu'à l'école primaire. Nous partons de votre niveau actuel, mesuré au début, et nous progressons à votre rythme.",
+	},
+	{
+		q: 'Quel est le lien avec la Méthode Boclet® ?',
+		r: 'Je suis formatrice certifiée Méthode Boclet®. Mes formations s’appuient sur ses piliers (lecture rapide, mémorisation et mind mapping), que je transmets avec ma propre pédagogie et en petits groupes.',
+	},
+	{
+		q: 'Comment accéder à la formation après le paiement ?',
+		r: "Vous recevez un e-mail de confirmation avec vos accès juste après l'achat. Pour les ateliers en direct et les séances individuelles, vous recevez aussi le lien de connexion (ou l'adresse à Paris) et un rappel la veille.",
+	},
+	{
+		q: 'Puis-je être remboursé·e ?',
+		r: "Les conditions de rétractation et de remboursement sont détaillées dans les conditions générales de vente. Et si quelque chose ne vous convient pas, écrivez-moi : nous trouverons une solution.",
+	},
+	{
+		q: 'De quoi ai-je besoin ?',
+		r: 'D’un livre que vous avez envie de lire, d’un crayon et de quinze minutes par jour. Rien d’autre.',
+	},
+];
+---
+
+<section class="section section--deep" id="faq">
+	<div class="container faq">
+		<header class="section-head">
+			<p class="eyebrow">Questions fréquentes</p>
+			<h2>Vos questions, <span class="accent">mes réponses</span></h2>
+			<p>Une autre question ? Écrivez-moi, je réponds personnellement.</p>
+		</header>
+
+		<div class="faq__list">
+			{
+				questions.map((item, i) => (
+					<details open={i === 0}>
+						<summary>
+							{item.q}
+							<Icon name="plus" />
+						</summary>
+						<p>{item.r}</p>
+					</details>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.faq {
+		display: grid;
+		grid-template-columns: 0.8fr 1.2fr;
+		gap: clamp(32px, 6vw, 80px);
+		align-items: start;
+	}
+
+	.faq .section-head {
+		position: sticky;
+		top: 120px;
+	}
+
+	details {
+		border-bottom: 1.5px solid var(--line);
+	}
+
+	details:first-child {
+		border-top: 1.5px solid var(--line);
+	}
+
+	summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+		padding: 24px 0;
+		font-family: var(--font-serif);
+		font-size: var(--step-1);
+		line-height: 1.3;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	summary::-webkit-details-marker {
+		display: none;
+	}
+
+	summary :global(svg) {
+		flex: none;
+		width: 22px;
+		height: 22px;
+		color: var(--brown);
+		transition: transform 0.25s;
+	}
+
+	details[open] summary :global(svg) {
+		transform: rotate(45deg);
+	}
+
+	details p {
+		padding-bottom: 26px;
+		max-width: 40rem;
+		color: var(--ink-soft);
+	}
+
+	@media (max-width: 860px) {
+		.faq {
+			grid-template-columns: 1fr;
+		}
+
+		.faq .section-head {
+			position: static;
+		}
+	}
+</style>
