@@ -5,6 +5,9 @@
 - id: atelier-declic
   ordre: 1
   titre: L'Atelier Déclic
+  seo:
+    titre: L'Atelier Déclic, lecture rapide en visio
+    description: "Atelier de lecture rapide en visio, en petit groupe : deux heures en direct pour comprendre ce qui ralentit votre lecture et repartir avec trois techniques."
   accroche: Deux heures en direct pour comprendre ce qui ralentit votre lecture et repartir avec vos trois premières techniques.
   format: En ligne, en direct · petit groupe
   duree: 2 h

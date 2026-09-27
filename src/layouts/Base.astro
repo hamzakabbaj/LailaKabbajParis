@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { title, description = site.description, noindex = false } = Astro.props;
-const fullTitle = title ? `${title} · ${site.name}` : `${site.name} · Lecture rapide à Paris et en ligne`;
+const fullTitle = title ? `${title} · ${site.name}` : `${site.name} · Formation en lecture rapide en ligne`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 // Image d'aperçu des liens partagés (WhatsApp, Facebook, LinkedIn…) : URL absolue obligatoire.
 const ogImage = new URL(withBase('/og-image.jpg'), Astro.site);
