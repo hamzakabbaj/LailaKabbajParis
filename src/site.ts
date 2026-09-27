@@ -13,6 +13,10 @@ export const site = {
 	piliers: ['Lecture rapide', 'Mémorisation', 'Mind mapping'],
 };
 
+// Préfixe un chemin interne (« /cgv », « /#faq ») par le base du site (sous-dossier GitHub Pages).
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+export const withBase = (path: string) => `${base}${path}`;
+
 export const formatPrix = (euros: number) =>
 	new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(euros);
 

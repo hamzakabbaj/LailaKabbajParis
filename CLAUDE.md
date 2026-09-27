@@ -40,4 +40,8 @@ There is no test suite. Verify changes with `npm run check`, a build, and screen
 ## Open decisions
 
 - **Payment provider** is not chosen yet (Stripe Payment Links vs Checkout plus a serverless function vs a merchant-of-record platform). Discuss it with the user before implementing. After payment, the provider should redirect to `/merci`.
-- **How trainings are delivered after purchase**, and the **hosting provider**, are undecided. The domain in `astro.config.mjs` (`site`) and the contact email in `src/site.ts` are placeholders.
+- **How trainings are delivered after purchase** is undecided. The contact email in `src/site.ts` is a placeholder.
+
+## Hosting
+
+GitHub Pages at https://hamzakabbaj.github.io/LailaKabbajParis/, deployed by `.github/workflows/deploy.yml` on every push to `main`. Because the site lives under a subpath, `astro.config.mjs` sets `base: '/LailaKabbajParis'`. Write internal links as `withBase('/cgv')` (from `src/site.ts`), never a bare `href="/…"`. Links that start with `#` are fine. For a custom domain later, set `site` to the domain, remove `base`, and add the domain in the repo's Pages settings.

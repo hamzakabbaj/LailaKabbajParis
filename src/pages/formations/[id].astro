@@ -3,7 +3,7 @@ import type { GetStaticPaths } from 'astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
-import { formatPrix, site } from '../../site';
+import { formatPrix, site, withBase } from '../../site';
 
 export const getStaticPaths = (async () => {
 	const formations = await getCollection('formations');
@@ -22,7 +22,7 @@ const { data } = Astro.props.formation;
 		<header class="fhero">
 			<div class="container fhero__inner">
 				<div>
-					<a class="back" href="/#formations">← Toutes les formations</a>
+					<a class="back" href={withBase('/#formations')}>← Toutes les formations</a>
 					<p class="eyebrow">{data.format}</p>
 					<h1>{data.titre}</h1>
 					<p class="fhero__lead">{data.accroche}</p>

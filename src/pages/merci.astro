@@ -1,7 +1,7 @@
 ---
 // Page de retour après un paiement réussi (URL de redirection à configurer chez le prestataire de paiement).
 import Page from '../layouts/Page.astro';
-import { site } from '../site';
+import { site, withBase } from '../site';
 ---
 
 <Page title="Merci, votre inscription est confirmée" eyebrow="Paiement reçu">
@@ -14,5 +14,5 @@ import { site } from '../site';
 		<a href={`mailto:${site.email}`}>{site.email}</a>.
 	</p>
 	<p>En attendant, préparez un livre que vous avez envie de lire&nbsp;: on commence bientôt.</p>
-	<a class="btn btn--ghost" href="/">Retour à l'accueil</a>
+	<a class="btn btn--ghost" href={withBase('/')}>Retour à l'accueil</a>
 </Page>

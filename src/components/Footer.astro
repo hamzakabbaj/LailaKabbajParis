@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { site } from '../site';
+import { site, withBase } from '../site';
 
 const year = new Date().getFullYear();
 ---
@@ -16,18 +16,18 @@ const year = new Date().getFullYear();
 		<nav aria-label="Liens utiles">
 			<p class="footer__title">Le site</p>
 			<ul>
-				<li><a href="/#formations">Formations</a></li>
-				<li><a href="/#test">Test de vitesse</a></li>
-				<li><a href="/#faq">Questions fréquentes</a></li>
+				<li><a href={withBase('/#formations')}>Formations</a></li>
+				<li><a href={withBase('/#test')}>Test de vitesse</a></li>
+				<li><a href={withBase('/#faq')}>Questions fréquentes</a></li>
 			</ul>
 		</nav>
 
 		<nav aria-label="Informations légales">
 			<p class="footer__title">Informations</p>
 			<ul>
-				<li><a href="/mentions-legales">Mentions légales</a></li>
-				<li><a href="/cgv">Conditions générales de vente</a></li>
-				<li><a href="/confidentialite">Confidentialité</a></li>
+				<li><a href={withBase('/mentions-legales')}>Mentions légales</a></li>
+				<li><a href={withBase('/cgv')}>Conditions générales de vente</a></li>
+				<li><a href={withBase('/confidentialite')}>Confidentialité</a></li>
 			</ul>
 		</nav>
 

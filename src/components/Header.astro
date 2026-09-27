@@ -1,18 +1,18 @@
 ---
-import { site } from '../site';
+import { site, withBase } from '../site';
 
 const links = [
-	{ href: '/#methode', label: 'La méthode' },
-	{ href: '/#test', label: 'Testez-vous' },
-	{ href: '/#formations', label: 'Formations' },
-	{ href: '/#a-propos', label: 'À propos' },
-	{ href: '/#faq', label: 'FAQ' },
+	{ href: withBase('/#methode'), label: 'La méthode' },
+	{ href: withBase('/#test'), label: 'Testez-vous' },
+	{ href: withBase('/#formations'), label: 'Formations' },
+	{ href: withBase('/#a-propos'), label: 'À propos' },
+	{ href: withBase('/#faq'), label: 'FAQ' },
 ];
 ---
 
 <header class="header">
 	<div class="container header__inner">
-		<a class="logo" href="/" aria-label={`${site.name}, accueil`}>
+		<a class="logo" href={withBase('/')} aria-label={`${site.name}, accueil`}>
 			<span class="logo__name">{site.name}</span>
 			<span class="logo__tag">{site.tagline} · {site.city}</span>
 		</a>
@@ -23,7 +23,7 @@ const links = [
 			</ul>
 		</nav>
 
-		<a class="btn btn--primary header__cta" href="/#formations">Voir les formations</a>
+		<a class="btn btn--primary header__cta" href={withBase('/#formations')}>Voir les formations</a>
 
 		<details class="menu">
 			<summary aria-label="Ouvrir le menu">
@@ -33,7 +33,7 @@ const links = [
 				<ul>
 					{links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
 				</ul>
-				<a class="btn btn--primary" href="/#formations">Voir les formations</a>
+				<a class="btn btn--primary" href={withBase('/#formations')}>Voir les formations</a>
 			</nav>
 		</details>
 	</div>

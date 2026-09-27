@@ -1,6 +1,7 @@
 ---
 // Test de vitesse de lecture : tout se passe dans le navigateur, rien n'est envoyé ni stocké.
 import Icon from './Icon.astro';
+import { withBase } from '../site';
 
 const questions = [
 	{
@@ -135,7 +136,7 @@ const questions = [
 				</div>
 
 				<div class="resultat__actions">
-					<a class="btn btn--primary" href="/formations/atelier-declic">Commencer par l'Atelier Déclic <Icon name="arrow" /></a>
+					<a class="btn btn--primary" href={withBase('/formations/atelier-declic')}>Commencer par l'Atelier Déclic <Icon name="arrow" /></a>
 					<button class="btn btn--ghost" type="button" data-restart>Refaire le test</button>
 				</div>
 			</div>

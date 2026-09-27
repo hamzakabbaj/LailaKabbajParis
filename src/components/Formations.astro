@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Icon from './Icon.astro';
-import { formatPrix } from '../site';
+import { formatPrix, withBase } from '../site';
 
 const formations = (await getCollection('formations')).sort((a, b) => a.data.ordre - b.data.ordre);
 ---
@@ -35,7 +35,7 @@ const formations = (await getCollection('formations')).sort((a, b) => a.data.ord
 						</ul>
 						<a
 							class:list={['btn', data.misEnAvant ? 'btn--primary' : 'btn--ghost']}
-							href={`/formations/${id}`}
+							href={withBase(`/formations/${id}`)}
 						>
 							Voir le programme <Icon name="arrow" />
 						</a>
