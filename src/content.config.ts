@@ -16,6 +16,8 @@ const formations = defineCollection({
 		pourQui: z.array(z.string()),
 		inclus: z.array(z.string()),
 		programme: z.array(z.object({ titre: z.string(), description: z.string() })),
+		// Titre et description pour Google, quand ils doivent différer du titre affiché et de l'accroche.
+		seo: z.object({ titre: z.string().optional(), description: z.string().optional() }).optional(),
 		// Lien de paiement (ex. Stripe Payment Link). Vide → bouton « Bientôt disponible ».
 		checkoutUrl: z.url().optional(),
 	}),
