@@ -11,7 +11,7 @@ Static marketing site (in French) for **Laila Kabbaj** (spelled Laila, not Leila
 Node ≥ 22.12 is required (Astro 7). Run `nvm use` first; `.nvmrc` pins Node 24.
 
 ```sh
-npm run dev            # dev server on http://localhost:4321 (placeholder testimonials visible)
+npm run dev            # dev server on http://localhost:4321/LailaKabbajParis/ (placeholder testimonials visible)
 npm run build          # production build → dist/ (placeholder testimonials removed)
 npm run build:preview  # production build that keeps placeholders, for sharing a preview
 npm run preview        # serve dist/ (Astro 7 runs it detached; stop with `npx astro preview stop`)
