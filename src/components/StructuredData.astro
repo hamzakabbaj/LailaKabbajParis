@@ -1,0 +1,40 @@
+---
+// Données structurées (JSON-LD) de la page d'accueil : qui est Laila, et quel est le site.
+// Pas de FAQPage, Course ni Review : Google n'affiche plus ces résultats enrichis pour un site comme
+// celui-ci, et on ne balise jamais ses propres avis.
+import { getImage } from 'astro:assets';
+import portrait from '../assets/laila-portrait.jpg';
+import { site, withBase } from '../site';
+
+const home = new URL(withBase('/'), Astro.site).href;
+const image = await getImage({ src: portrait, width: 427, format: 'jpg' });
+const personId = `${home}#laila`;
+
+const graph = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'Person',
+			'@id': personId,
+			name: site.name,
+			jobTitle: site.certification,
+			knowsAbout: site.piliers,
+			url: home,
+			image: new URL(image.src, Astro.site).href,
+			sameAs: [site.instagram],
+		},
+		{
+			'@type': 'WebSite',
+			'@id': `${home}#site`,
+			name: site.name,
+			url: home,
+			inLanguage: 'fr-FR',
+			publisher: { '@id': personId },
+		},
+	],
+};
+// Échappe « < » pour qu'aucune valeur ne puisse fermer la balise <script>.
+const json = JSON.stringify(graph).replace(/</g, '\\u003c');
+---
+
+<script is:inline type="application/ld+json" set:html={json} />
