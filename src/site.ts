@@ -3,7 +3,7 @@ export const site = {
 	name: 'Laila Kabbaj',
 	tagline: 'Lecture rapide',
 	description:
-		'Formations en lecture rapide, en ligne et à Paris. Lisez plus efficacement, comprenez plus vite et retrouvez le plaisir de finir vos livres.',
+		'Formations en lecture rapide et mémorisation, en ligne et en petit groupe, avec Laila Kabbaj, formatrice certifiée Méthode Boclet®. Lisez plus efficacement.',
 	email: 'contact@lailakabbaj.fr', // TODO
 	instagram: 'https://www.instagram.com/lailakabbaj.paris/',
 	instagramHandle: '@lailakabbaj.paris',
