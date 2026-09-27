@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Static marketing site (in French) for **Laila Kabbaj** (spelled Laila, not Leila; the folder name is wrong), a Paris-based speed-reading trainer and "Formatrice certifiée Méthode Boclet®". The site has one landing page, a detail page per training that leads into a payment step, and legal pages. Instagram: https://www.instagram.com/lailakabbaj.paris/.
+Static marketing site (in French) for **Laila Kabbaj** (spelled Laila, not Leila), a Paris-based speed-reading trainer and "Formatrice certifiée Méthode Boclet®". The site has one landing page, a detail page per training that leads into a payment step, and legal pages. Instagram: https://www.instagram.com/lailakabbaj.paris/.
 
 ## Commands
 
